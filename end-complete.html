@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Survey Completed — SurveyPronto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #09AB87;
+    --green-dark: #067C62;
+    --green-light: #A5E1CE;
+    --green-soft: #E8F7F2;
+    --ink: #0C1512;
+    --ink-soft: #3D3D3D;
+    --muted: #6B7A75;
+    --bg: #F4F6F5;
+    --card: #FFFFFF;
+    --border: #E6ECEA;
+    --pink: #C4267A;
+    --pink-dark: #A21E65;
+    --yellow: #E8BF52;
+    --radius-sm: 5px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --shadow-sm: 0 1px 2px rgba(6, 124, 98, 0.04), 0 2px 6px rgba(6, 124, 98, 0.05);
+    --shadow-md: 0 10px 30px rgba(6, 124, 98, 0.10), 0 2px 8px rgba(6, 124, 98, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Jost", Arial, sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* --- Layout container (site-wide) --- */
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1300px;
+  }
+
+  /* --- Header --- */
+  .site-header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .logo img {
+    height: 3.5rem;
+    width: auto;
+    vertical-align: middle;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .header-right .balance-label { color: var(--ink-soft); }
+  .header-right .balance-value {
+    font-weight: 700;
+    margin-left: 6px;
+  }
+  .header-right .progress {
+    display: inline-block;
+    width: 140px;
+    height: 6px;
+    background: #E6ECEA;
+    border-radius: 999px;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .header-right .progress > span {
+    display: block;
+    width: 30%;
+    height: 100%;
+    background: var(--green);
+    border-radius: 999px;
+  }
+
+  /* --- Main layout --- */
+  .wrap {
+    max-width: 780px;
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* decorative top band */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 100%);
+  }
+
+  /* --- Success icon --- */
+  .icon {
+    width: 160px;
+    height: 160px;
+    margin: 8px auto 28px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: pop 600ms cubic-bezier(.2,1.2,.3,1) both;
+  }
+  .icon .inner {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon svg {
+    width: 64px;
+    height: 64px;
+    color: #fff;
+  }
+  .icon svg path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: dash 700ms 300ms ease-out forwards;
+  }
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* --- Copy --- */
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    font-weight: 500;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    background: var(--green-soft);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: "Jost", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  h1 .accent { color: var(--green-dark); }
+  p.lead {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 10px;
+  }
+
+  /* --- Info block / ETA --- */
+  .eta {
+    margin: 32px auto 0;
+    max-width: 560px;
+    background: var(--green-soft);
+    border: 1px solid #D5EBE2;
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .eta .eta-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green-dark);
+  }
+  .eta .eta-icon svg { width: 22px; height: 22px; }
+  .eta .eta-body {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .eta .eta-body strong {
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+  .eta-title {
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  /* --- Steps / what happens next --- */
+  .next {
+    margin: 36px auto 0;
+    max-width: 560px;
+    text-align: left;
+  }
+  .next-title {
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-left: 4px;
+  }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+  .steps li:hover { border-color: var(--green-light); transform: translateY(-1px); }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .steps li strong { color: var(--ink); font-weight: 600; }
+
+  /* --- Actions --- */
+  .actions {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: "Jost", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    padding: 14px 36px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease, color 140ms ease;
+    line-height: 1;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(9, 171, 135, 0.25);
+  }
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(6, 124, 98, 0.28);
+  }
+  .btn-secondary {
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--green);
+    color: var(--green-dark);
+  }
+  .btn-pink {
+    background: var(--pink);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(196, 38, 122, 0.22);
+  }
+  .btn-pink:hover { background: var(--pink-dark); transform: translateY(-1px); }
+
+  /* --- Footer note --- */
+  .note {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .note a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+  .note a:hover { text-decoration: underline; }
+
+  .footer {
+    text-align: center;
+    padding: 28px 16px 40px;
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 0; }
+    .logo img { height: 2.5rem; }
+    .header-right { gap: 10px; font-size: 13px; }
+    .header-right .progress { width: 90px; }
+    .wrap { margin: 24px auto; }
+    .card { padding: 36px 22px; border-radius: 16px; }
+    .icon { width: 128px; height: 128px; }
+    .icon .inner { width: 96px; height: 96px; }
+    .icon svg { width: 50px; height: 50px; }
+    h1 { font-size: 26px; }
+    p.lead { font-size: 15px; }
+    .eta { padding: 14px 16px; gap: 12px; }
+    .actions { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header replicating SurveyPronto chrome -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="/" class="logo" aria-label="SurveyPronto home">
+        <img src="https://surveypronto.com/gx4/fplogo.png" alt="SurveyPronto" />
+      </a>
+      <div class="header-right">
+        <span class="balance-label">Your balance <span class="balance-value">$5.452</span></span>
+        <span class="progress" aria-hidden="true"><span></span></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" aria-labelledby="title">
+      <!-- success icon: double-ring green with checkmark -->
+      <div class="icon" role="img" aria-label="Success">
+        <div class="inner">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 27 L22 35 L39 18" />
+          </svg>
+        </div>
+      </div>
+
+      <span class="eyebrow">Survey completed</span>
+      <h1>Thank you for <span class="accent">completing</span><br />the survey!</h1>
+      <p class="lead">We appreciate your time and your honest answers — both help us connect you with higher-paying offers in the future.</p>
+
+      <!-- ETA / reward block -->
+      <div class="eta" role="note">
+        <div class="eta-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="eta-body">
+          <div class="eta-title">Your reward</div>
+          Will be credited to your account after quality verification — typically within <strong>7 to 14 days</strong>.
+        </div>
+      </div>
+
+      <!-- Next steps -->
+      <div class="next">
+        <div class="next-title">What happens next</div>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <div><strong>Quality check.</strong> Some surveys skip the “pending” status and are approved directly — this is normal.</div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div><strong>Approval.</strong> Approved surveys appear automatically in your <em>Transactions</em> list.</div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div><strong>Withdraw.</strong> Once your balance reaches the minimum, request a payout from the Withdrawal tab.</div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <a class="btn btn-primary" href="/earn">
+          Take another survey
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <p class="note">
+        Got a question about this survey? <a href="/help">Visit our Help Center</a> — we answer within 24 hours.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">© SurveyPronto. Thank you for being part of our community.</footer>
+
+</body>
+</html>
