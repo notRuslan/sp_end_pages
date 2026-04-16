@@ -1,0 +1,108 @@
+body {
+    background-color: #f5f5dc;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.controls {
+    position: fixed;
+    top: 20px;
+    z-index: 10000;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #fbc02d;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px #f57f17;
+}
+
+.reward-coins-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* --- Плоская монета с кантом --- */
+.rolling-coin-item {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff3b0 0%, #fbc02d 50%, #f57f17 100%);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 0 0 3px #b86a00,
+        inset 0 0 0 4px #ffd54f,
+        inset 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: bold 24px "Times New Roman", serif;
+    color: #8b4513;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    bottom: 30px;
+    right: -100px;
+    opacity: 0;
+    z-index: 10;
+    animation: coin-roll-in 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.rolling-coin-item::before {
+    content: '$';
+    position: relative;
+    z-index: 2;
+}
+
+.rolling-coin-item::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 50%;
+}
+
+/* --- Стопка (вид сбоку) --- */
+.coin-stack-wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 200px;
+    z-index: 5;
+}
+
+.stacked-coin {
+    width: 54px;
+    height: 10px;
+    background: linear-gradient(90deg, #b86a00 0%, #fbc02d 20%, #fff9c4 50%, #fbc02d 80%, #b86a00 100%);
+    border-radius: 5px / 3px;
+    position: absolute;
+    left: 50%;
+    margin-left: -27px;
+    opacity: 0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+    animation: coin-pop-up 0.4s ease-out forwards;
+}
+
+@keyframes coin-pop-up {
+    0% { opacity: 0; transform: translateY(20px) rotateX(65deg); }
+    100% { opacity: 1; transform: translateY(0) rotateX(65deg); }
+}
+
+@keyframes coin-roll-in {
+    0% { right: -100px; opacity: 0; transform: rotate(0deg); }
+    10% { opacity: 1; }
+    100% { right: calc(50% - 38px); opacity: 1; transform: rotate(-1080deg); }
+}
